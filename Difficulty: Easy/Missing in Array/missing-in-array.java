@@ -5,6 +5,7 @@ import java.io.*;
 import java.util.*;
 
 class GFG {
+
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -29,22 +30,13 @@ class Solution {
 
     // Note that the size of the array is n-1
     int missingNumber(int n, int arr[]) {
- boolean[] temp = new boolean[n + 1];
 
-    // Mark numbers present in arr as true
-    for (int num : arr) {
-        temp[num] = true;
-    }
-
-    // Find the missing number
-    for (int i = 1; i <= n; i++) {
-        if (!temp[i]) {
-            return i; // Return the missing number
+        // Your Code Here
+           int sum=0;
+        for(int i =0;i<arr.length;i++){
+            sum= sum+arr[i];
         }
+        return n*(n+1)/2 - sum;
+        
     }
-
-    return -1; // Default return if no number is missing (though based on problem, there should be one missing)
-}
-
-
 }
