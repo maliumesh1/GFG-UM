@@ -22,44 +22,21 @@ class GFG {
 // User function Template for Java
 
 class Solution {
-    long ExtractNumber(String sentence) {
+     long ExtractNumber(String sentence) {
         // code here
-        long max = Integer.MIN_VALUE;
-        int n = sentence.length();
-        
-        for(int i = 0; i < n; i++)
-        {
-            long sum = 0;
-            boolean isEnter = false;
-            
-            while(i < n && Character.isDigit(sentence.charAt(i)))
-            {
-                sum = sum*10 + (sentence.charAt(i) - '0');
-                isEnter = true;
-                if(sentence.charAt(i) - '0' == 9)
-                {
-                    while(i < n && Character.isDigit(sentence.charAt(i)))
-                    {
-                        i++;
-                    }
-                    sum = 0;
-                    isEnter = false;
-                    break;
+        String[] str=sentence.split(" ");
+        long temp=-1;
+        long max=-1;
+        for(int i=0;i<str.length;i++){
+            String t=str[i];
+            char ch=t.charAt(0);
+            if((int)ch>=48 && (int)ch<57 && t.contains("9")==false){
+                temp=Long.parseLong(str[i]);
+                if(max<temp){
+                    max=temp;
                 }
-                i++;
             }
-            
-            if(isEnter)
-            {
-                max = Math.max(max,sum);
-            }
-        }
-        
-        if(max == Integer.MIN_VALUE)
-        {
-            return -1;
-        }
-        
+        }  
         return max;
-    }
+     }
 }
