@@ -1,47 +1,59 @@
 //{ Driver Code Starts
+// Initial Template for Java
+
 import java.io.*;
-import java.lang.*;
 import java.util.*;
 
-class GFG {
-    public static void main(String[] args) throws IOException {
+public class Main {
 
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int t = Integer.parseInt(br.readLine());
-
+        int t;
+        t = Integer.parseInt(br.readLine());
         while (t-- > 0) {
-            int size = Integer.parseInt(br.readLine());
-            String[] arrStr = ((String)br.readLine()).split("\\s+");
-            int[] arr = new int[size];
-            for (int i = 0; i < size; i++) {
-                arr[i] = Integer.parseInt(arrStr[i]);
+            String line = br.readLine();
+            String[] tokens = line.split(" ");
+
+            // Create an ArrayList to store the integers
+            ArrayList<Integer> array = new ArrayList<>();
+
+            // Parse the tokens into integers and add to the array
+            for (String token : tokens) {
+                array.add(Integer.parseInt(token));
             }
-            System.out.println(new Solution().minJumps(arr, size));
+
+            int[] arr = new int[array.size()];
+            int idx = 0;
+            for (int i : array) arr[idx++] = i;
+
+            System.out.println(new Solution().minJumps(arr));
+            // System.out.println("~");
         }
     }
 }
 
 // } Driver Code Ends
 
-
 class Solution {
-    static int minJumps(int[] arr, int n) {
-        // your code here
+    static int minJumps(int[] arr) {
+ 
+        if(arr[0]==0)return -1;
+        int s=arr[0];
+        int maxReach=arr[0];
+        int move=1;
+        int n=arr.length;
         
-        if (n<=1) return 0;
-        if (arr[0] == 0) return -1;
-        int step=0;
-        int jump=0;
-        int nextmove=0;
-        
-        for(int i=0;i<n;i++){
-            nextmove=Math.max(nextmove,i+arr[i]);
-            if(i==step){
-               jump++;
-                step=nextmove;
-                if(step>=n-1) return jump;
+        for(int i=1;i<n;i++){
+            if(i==n-1)return move;
+            maxReach=Math.max(maxReach, i+arr[i]);
+            s--;
+            if(s==0){
+                move++;
+                if(i>=maxReach)return -1;
+                s=maxReach-i;
             }
         }
         return -1;
+        
     }
 }
