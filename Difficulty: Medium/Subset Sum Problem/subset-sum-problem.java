@@ -35,29 +35,36 @@ class GFG
 
 class Solution{
 
-   static Boolean isSubsetSum(int N, int arr[], int sum){
-        boolean dp[][] = new boolean[N+1][sum+1];
-        for(int i=0;i<N+1;i++){
-            for(int j=0;j<sum+1;j++){
-                if(i==0){
+    static Boolean isSubsetSum(int N, int arr[], int sum) {
+        boolean dp[][] = new boolean[N + 1][sum + 1]; // DP matrix
+
+        // Initialization of the first row and column
+        for (int i = 0; i <= N; i++) {
+            for (int j = 0; j <= sum; j++) {
+                if (i == 0) {
+                    // No items, so no subset can make a non-zero sum
                     dp[i][j] = false;
                 }
-                if(j==0){
+                if (j == 0) {
+                    // Sum is 0, so the empty subset always satisfies this
                     dp[i][j] = true;
                 }
             }
         }
-        
-        for(int i=1;i<N+1;i++){
-            for(int j=1;j<sum+1;j++){
-                if(arr[i-1] <= j){
-                    dp[i][j] = dp[i-1][j-arr[i-1]] || dp[i-1][j];
-                }
-                else{
-                    dp[i][j] = dp[i-1][j];
+
+        // DP logic: filling the table
+        for (int i = 1; i <= N; i++) {
+            for (int j = 1; j <= sum; j++) {
+                if (arr[i - 1] <= j) {
+                    // Either include the current element or exclude it
+                    dp[i][j] = dp[i - 1][j - arr[i - 1]] || dp[i - 1][j];
+                } else {
+                    // Exclude the current element
+                    dp[i][j] = dp[i - 1][j];
                 }
             }
         }
-        return dp[N][sum];
+
+        return dp[N][sum]; // Return true or false based on subset sum existence
     }
 }
