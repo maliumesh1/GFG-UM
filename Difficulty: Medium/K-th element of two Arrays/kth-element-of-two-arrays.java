@@ -33,44 +33,27 @@ class GFG {
 // } Driver Code Ends
 
 
-// User function Template for Java
-
 class Solution {
     public long kthElement(int k, int arr1[], int arr2[]) {
         // code here
-       int l = 0;
-       int r = 0;
-
-    while (l < arr1.length && r < arr2.length) {
-    if (k == 1) {
-        return (long)(Math.min(arr1[l], arr2[r]));
-    }
-    if (arr1[l] < arr2[r]) {
-        l++;
-    } else {
-        r++;
-    }
-    k--;
-    }
-
-// If one of the arrays is exhausted
-while (l < arr1.length) {
-    if (k == 1) {
-        return (long)(arr1[l]);
-    }
-    l++;
-    k--;
-}
-
-while (r < arr2.length) {
-    if (k == 1) {
-        return (long)(arr2[r]);
-    }
-    r++;
-    k--;
-}
-
-// If k is still greater than 1 after the arrays are exhausted
-return 0;
+       int[] ans = new int[arr1.length + arr2.length];
+        int start = 0;
+        int start2 = 0;
+        int i = 0;
+        while (start < arr1.length && start2 < arr2.length) {
+            if (arr1[start] < arr2[start2]) {
+                ans[i++] = arr1[start++];
+            } else {
+                ans[i++] = arr2[start2++];
+            }
+        }
+        while (start < arr1.length) {
+            ans[i++] = arr1[start++];
+        }
+        while (start2 < arr2.length) {
+            ans[i++] = arr2[start2++];
+        }
+        
+        return ans[k-1];
     }
 }
