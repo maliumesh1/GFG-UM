@@ -33,5 +33,5 @@ BST2:<strong>
 &nbsp;2
 <strong>Output: </strong>2 5 6 8 9 10 11 12<strong>
 Explanation: </strong>After merging and sorting the two BST we get 2 5 6 8 9 10 11 12.</span></pre>
-<p><span style="font-size: 18px;"><strong>Expected Time Complexity:&nbsp;</strong>O(m+n)<br><strong>Expected Auxiliary Space:&nbsp;</strong>O(Height of BST1 + Height of BST2 + m + n)</span></p>
-<p><span style="font-size: 18px;"><strong>Constraints:</strong><br>1 ≤ Number of Nodes ≤ 10<sup>5</sup></span></p></div><br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Binary Search Tree</code>&nbsp;<code>Tree</code>&nbsp;<code>Data Structures</code>&nbsp;
+<p><span style="font-size: 18px;"><strong>Expected Time Complexity:&nbsp;</strong>O((m+n)*log(m+n))<br><strong>Expected Auxiliary Space:&nbsp;</strong>O(Height of BST1 + Height of BST2 + m + n)</span></p>
+<p><span style="font-size: 18px;"><strong>Constraints:</strong><br>1 ≤ Number of Nodes, value of nodes ≤ 10<sup>5</sup></span></p></div><br><p><span style=font-size:18px><strong>Topic Tags : </strong><br><code>Binary Search Tree</code>&nbsp;<code>Tree</code>&nbsp;<code>Data Structures</code>&nbsp;
