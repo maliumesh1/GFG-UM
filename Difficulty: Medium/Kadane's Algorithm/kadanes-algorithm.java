@@ -38,21 +38,29 @@ class Main {
 
 // User function Template for Java
 class Solution {
-
-    // arr: input array
-    // Function to find the sum of contiguous subarray with maximum sum.
-        long maxSubarraySum(int[] arr) {
+    int maxSubarraySum(int[] arr) {
         // Your code here
-        int max=Integer.MIN_VALUE, currSum=0;
-        for(int i=0;i<arr.length;i++){
-            currSum+=arr[i];
-            if(max<currSum){
-                max=currSum;
+        int n =  arr.length;
+        long maxsum = Integer.MIN_VALUE;
+        long currsum = 0;
+        
+        for(int i = 0 ;i < n; i++)
+        {
+            currsum += arr[i];
+            if(currsum < 0)
+            {
+                currsum = 0;
             }
-            if(currSum<0){
-                currSum=0;
-            }
+            maxsum = Math.max(maxsum,currsum);
         }
-        return max;
+        if(maxsum > 0)
+        {
+            return (int)maxsum;
+        }
+        else
+        {
+            Arrays.sort(arr);
+            return arr[n-1];
+        }
     }
 }
