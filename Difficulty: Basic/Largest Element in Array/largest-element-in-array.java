@@ -40,6 +40,8 @@ class GFG {
             int res = obj.largest(arr);
 
             System.out.println(res);
+
+            System.out.println("~");
         }
     }
 }
@@ -51,14 +53,23 @@ class GFG {
 class Solution {
     public static int largest(int[] arr) {
         // code here
-        int j =arr[0];
-        for(int i=1 ; i<arr.length ; i++)
-        {
-            if(j<arr[i])
-            {
-                j = arr[i];
-            }
-        }
-        return j;
+       Arrays.sort(arr);
+       return arr[arr.length-1];
     }
 }
+
+// class Solution {
+//     public static int largest(int[] arr) {
+//         // code here
+//         int large = arr[0];
+        
+//         for(int i=1;i<arr.length;i++)
+//         {
+//             if(arr[i] > large)
+//             {
+//                 large=arr[i];
+//             }
+//         }
+//         return large;
+//     }
+// }
