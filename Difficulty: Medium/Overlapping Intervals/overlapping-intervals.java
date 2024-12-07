@@ -1,31 +1,27 @@
 //{ Driver Code Starts
-import java.util.*;
-import java.lang.*;
 import java.io.*;
-class GFG
-{
-    public static void main(String[] args) throws IOException
-    {
+import java.util.*;
+
+class GFG {
+    public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int T = Integer.parseInt(br.readLine().trim());
-        while(T-->0)
-        {
+        while (T-- > 0) {
             int n = Integer.parseInt(br.readLine().trim());
-            String[] s = br.readLine().trim().split(" ");
-            int[][] Intervals = new int[n][2];
-            int j = 0;
-            for(int i = 0; i < n; i++){
-                Intervals[i][0] = Integer.parseInt(s[j]);
-                j++;
-                Intervals[i][1] = Integer.parseInt(s[j]);
-                j++;
+            int[][] arr = new int[n][2];
+            for (int i = 0; i < n; i++) {
+                String temp[] = br.readLine().trim().split(" ");
+                arr[i][0] = Integer.parseInt(temp[0]);
+                String x = temp[1];
+                arr[i][1] = Integer.parseInt(x);
             }
             Solution obj = new Solution();
-            int[][] ans = obj.overlappedInterval(Intervals);
-            for(int i = 0; i < ans.length; i++){
-                for(j = 0; j < ans[i].length; j++){
-                    System.out.print(ans[i][j] + " ");
-                }
+            // The mergeOverlap function now returns a List<int[]>
+            List<int[]> ans = obj.mergeOverlap(arr);
+
+            // Printing the merged arr
+            for (int[] interval : ans) {
+                System.out.print(interval[0] + " " + interval[1] + " ");
             }
             System.out.println();
         }
@@ -35,23 +31,26 @@ class GFG
 // } Driver Code Ends
 
 class Solution {
-    public int[][] overlappedInterval(int[][] arr) {
-        int n = arr.length;
+    public List<int[]> mergeOverlap(int[][] arr) {
+        // Sort the intervals based on the start time
         Arrays.sort(arr, (a, b) -> a[0] - b[0]);
 
-        List<int[]> ans = new ArrayList<>();
+        List<int[]> merged = new ArrayList<>();
+        merged.add(arr[0]);
 
-        for (int i = 0; i < n; i++) {
-           
-            if (ans.isEmpty() || arr[i][0] > ans.get(ans.size() - 1)[1]) {
-                ans.add(new int[]{arr[i][0], arr[i][1]});
+        for (int i = 1; i < arr.length; i++) {
+            int[] last = merged.get(merged.size() - 1);
+
+            // Check if the current interval overlaps with the last merged interval
+            if (arr[i][0] <= last[1]) {
+                // Merge the current interval with the last merged interval
+                last[1] = Math.max(last[1], arr[i][1]);
             } else {
-               
-                ans.get(ans.size() - 1)[1] = Math.max(ans.get(ans.size() - 1)[1], arr[i][1]);
+                // Add the current interval to the list of merged intervals
+                merged.add(arr[i]);
             }
         }
 
-       
-        return ans.toArray(new int[ans.size()][]);
+        return merged;
     }
 }
