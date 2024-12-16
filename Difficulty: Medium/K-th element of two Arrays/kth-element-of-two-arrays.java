@@ -13,19 +13,20 @@ class GFG {
             int k = Integer.parseInt(br.readLine().trim());
 
             String[] line1 = br.readLine().trim().split(" ");
-            int[] arr1 = new int[line1.length];
+            int[] a = new int[line1.length];
             for (int i = 0; i < line1.length; i++) {
-                arr1[i] = Integer.parseInt(line1[i]);
+                a[i] = Integer.parseInt(line1[i]);
             }
 
             String[] line2 = br.readLine().trim().split(" ");
-            int[] arr2 = new int[line2.length];
+            int[] b = new int[line2.length];
             for (int i = 0; i < line2.length; i++) {
-                arr2[i] = Integer.parseInt(line2[i]);
+                b[i] = Integer.parseInt(line2[i]);
             }
 
             Solution ob = new Solution();
-            System.out.println(ob.kthElement(k, arr1, arr2));
+            System.out.println(ob.kthElement(a, b, k));
+            System.out.println("~");
         }
     }
 }
@@ -33,27 +34,19 @@ class GFG {
 // } Driver Code Ends
 
 
+// User function Template for Java
 class Solution {
-    public long kthElement(int k, int arr1[], int arr2[]) {
-        // code here
-       int[] ans = new int[arr1.length + arr2.length];
-        int start = 0;
-        int start2 = 0;
-        int i = 0;
-        while (start < arr1.length && start2 < arr2.length) {
-            if (arr1[start] < arr2[start2]) {
-                ans[i++] = arr1[start++];
-            } else {
-                ans[i++] = arr2[start2++];
-            }
-        }
-        while (start < arr1.length) {
-            ans[i++] = arr1[start++];
-        }
-        while (start2 < arr2.length) {
-            ans[i++] = arr2[start2++];
-        }
+    public int kthElement(int a[], int b[], int k) {
+        ArrayList<Integer> arr = new ArrayList<Integer>();
         
-        return ans[k-1];
+        for(int i :b){
+            arr.add(i);
+        }
+        for(int i :a){
+            arr.add(i);
+        }
+        Collections.sort(arr);
+        
+        return arr.get(k-1);
     }
 }
