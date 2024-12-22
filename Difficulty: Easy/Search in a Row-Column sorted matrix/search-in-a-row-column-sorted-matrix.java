@@ -19,7 +19,7 @@ class gfg {
 
             int x = sc.nextInt();
 
-            if (new Sol().matSearch(mat, x))
+            if (new Solution().matSearch(mat, x))
                 System.out.println("true");
             else
                 System.out.println("false");
@@ -31,17 +31,28 @@ class gfg {
 // } Driver Code Ends
 
 
-class Sol {
+class Solution {
     public static boolean matSearch(int mat[][], int x) {
         // your code here
-        for(int i=0; i<mat.length; i++)
-        {
-            for(int j=0;j<mat[0].length ;j++)
-            {
-                if(mat[i][j] == x)
+         int n = mat.length;
+        int m = mat[0].length;
+        
+        // Start from the top-right corner
+        int i = 0, index = m - 1;
+        
+        while (i < n && index >= 0) {
+            if (mat[i][index] == x) {
                 return true;
+            } else if (mat[i][index] > x) {
+                // Move left
+                index--;
+            } else {
+                // Move down
+                i++;
             }
         }
+        
+        // Element not found
         return false;
     }
 }
